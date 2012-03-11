@@ -80,5 +80,13 @@ class UsersController < ApplicationController
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
-  end
+
+
+  def send
+  @user =  User.find(params[:id])
+  @user.UserMailer.congratulation_HP(@user).deliver
+
+
+end
+end
 end

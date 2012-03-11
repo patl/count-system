@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-      UserMailer.registration_confirmation(@user).deliver
+      UserMailer.congratulation_HP(@user).deliver
         format.html { redirect_to(@user, :notice => 'User was successfully created.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
@@ -80,5 +80,13 @@ class UsersController < ApplicationController
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
-  end
+
+
+  def send
+  @user =  User.find(params[:id])
+  @user.UserMailer.congratulation_HP(@user).deliver
+
+
+end
+end
 end
